@@ -6,21 +6,43 @@ public class Node : MonoBehaviour
 {
 
     public Transform Duck;
+    public Material DefaultMaterial;
+    public Material VacantPlacementMaterial;
+    public Material OccupiedPlacementMaterial;
 
-    // Start is called before the first frame update
+    private MeshRenderer meshRenderer;
+    private bool isOccupied = false;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
+        meshRenderer = GetComponent<MeshRenderer>();   
     }
 
     private void OnMouseDown()
     {
-        Instantiate(Duck, transform.position + new Vector3(0, 1.2f, 0), Quaternion.identity);
+        if (DuckManager.IsPlacingDuck && !isOccupied)
+        {
+            Instantiate(Duck, transform.position + new Vector3(0, 1.2f, 0), Quaternion.identity);
+            DuckManager.ToppingBuilt();
+            isOccupied = true;
+            meshRenderer.material = DefaultMaterial;
+        }
+        else if (!DuckManager.IsPlacingDuck)
+        {
+
+        }
+    }
+
+    private void OnMouseEnter()
+    {
+        if (DuckManager.IsPlacingDuck)
+            meshRenderer.material = isOccupied ? OccupiedPlacementMaterial : VacantPlacementMaterial;
+    }
+
+    private void OnMouseExit()
+    {
+        if (DuckManager.IsPlacingDuck)
+            meshRenderer.material = DefaultMaterial;
     }
 
 }

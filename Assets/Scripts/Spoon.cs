@@ -19,4 +19,11 @@ public class Spoon : MonoBehaviour
     {
         transform.Translate(Vector3.forward * Velocity * Time.deltaTime);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        print("hi");
+        if (collision.gameObject.CompareTag("Environment"))
+            Destroy(gameObject);
+    }
 }

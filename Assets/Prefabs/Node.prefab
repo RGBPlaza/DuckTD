@@ -107,3 +107,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Duck: {fileID: 3078442835906975219, guid: fd60761b090a18947bbba8d6d1c837db, type: 3}
+  DefaultMaterial: {fileID: 2100000, guid: 8d1c45a6343571942bbb7c7a72fd32cf, type: 2}
+  VacantPlacementMaterial: {fileID: 2100000, guid: d526df1c88e272441b560b55888789cb,
+    type: 2}
+  OccupiedPlacementMaterial: {fileID: 2100000, guid: ed8b79624f344214fb4c77c44acfd236,
+    type: 2}

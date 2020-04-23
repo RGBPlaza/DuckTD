@@ -13,6 +13,7 @@ public class Duck : MonoBehaviour
     public float SpoonDamage = 1f;
     public float FoVAngle = 60f;
     public bool RightHanded = true;
+    public TargetMode TargetMode = TargetMode.First;
 
     public Transform ProjectilePrefeb;
 
@@ -27,7 +28,7 @@ public class Duck : MonoBehaviour
         InvokeRepeating(nameof(UpdateTarget), 0f, 0.2f);
         animator = GetComponent<Animator>();
         animator.SetBool("Right_Handed", RightHanded);
-        animator.SetFloat("Speed", FireRate);
+        animator.SetFloat("Speed", FireRate * FireRate);
     }
 
     private bool isLookingAtTarget = false;
@@ -40,21 +41,26 @@ public class Duck : MonoBehaviour
             isLookingAtTarget = Vector3.Angle(transform.forward, targetDir) <= FoVAngle / 2f;
             Quaternion lookRotation = Quaternion.LookRotation(targetDir);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * RotationSpeed);
+            print("hi");
         }
-        if (Input.GetKeyDown(KeyCode.Space)) animator.SetTrigger("Throw");
     }
 
     private void UpdateTarget()
     {
         int nearestEnemyIndex = -1;
-        float shortestDistanceFromEnemy = Range; 
+        float superlative = TargetMode == TargetMode.Last ? Mathf.NegativeInfinity : Mathf.Infinity; 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < enemies.Length; i++)
         {
-            float dist = Vector3.Distance(transform.position, enemies[i].transform.position);
-            if (dist <= shortestDistanceFromEnemy)
+            float distToEnemy = Vector3.Distance(transform.position, enemies[i].transform.position);
+            if (distToEnemy <= Range)
             {
-                shortestDistanceFromEnemy = dist;
+                float enemyDistFromEnd = enemies[i].GetComponent<Enemy>().DistanceFromEnd;
+                if ((TargetMode == TargetMode.First && enemyDistFromEnd < superlative) || (TargetMode == TargetMode.Last && enemyDistFromEnd > superlative))
+                    superlative = enemyDistFromEnd;
+                else if (TargetMode == TargetMode.Nearest && distToEnemy < superlative)
+                    superlative = distToEnemy;
+                else continue;
                 nearestEnemyIndex = i;
             }
         }
@@ -77,7 +83,8 @@ public class Duck : MonoBehaviour
             if (isLookingAtTarget)
             {
                 projectileInstantiationData.Add((projectilePosition, projectileRotation));
-                Invoke(nameof(InstantiateProjectile), 0.556f / FireRate);
+                Invoke(nameof(InstantiateProjectile), 0.2f / FireRate);
+                animator.ResetTrigger("Throw");
                 animator.SetTrigger("Throw");
             }
             yield return new WaitForSeconds(1f / FireRate);
@@ -101,4 +108,16 @@ public class Duck : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, Range);
     }
 
+    private void OnMouseDown()
+    {
+        DuckManager.Select(this);
+    }
+
+}
+
+public enum TargetMode
+{
+    First,
+    Last,
+    Nearest
 }

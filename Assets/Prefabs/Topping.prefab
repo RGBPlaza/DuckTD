@@ -46,12 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Range: 20
-  FireRate: 1.66
+  FireRate: 3
   RotationSpeed: 10
   SpoonVelocity: 50.92
   SpoonDamage: 2
   FoVAngle: 16
   RightHanded: 1
+  TargetMode: 0
   ProjectilePrefeb: {fileID: 4688271412684583504, guid: fab2faadd14e0cc49a4ea41803fc76a7,
     type: 3}
 --- !u!95 &3282270174919415351
@@ -305,11 +306,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b3cfb467e88ceaf439bab063b87b562b, type: 2}
+    - target: {fileID: 5051746840642452563, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 6687800826856340071, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7534120000519964010, guid: db106fa113fe21c4698cfe5ab743d1fc,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6feae3c8602411942b638b5d5724e8bc, type: 2}
+    - target: {fileID: 7584999718167117314, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 8208578879198709976, guid: db106fa113fe21c4698cfe5ab743d1fc,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
