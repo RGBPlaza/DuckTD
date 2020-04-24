@@ -7,7 +7,7 @@ public class Environment : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(DuckManager.Instance.IsDuckSelected && Input.mousePosition.y > 126)
+        if(DuckManager.Instance.IsDuckSelected && Input.mousePosition.y > DuckManager.Instance.ConfigPanelHeight)
             DuckManager.Instance.Deselect();
     }
 }

@@ -11,6 +11,8 @@ public class DuckManager : MonoBehaviour
     public GameObject ConfigPanel;
     public Dropdown TargetModeDropdown;
 
+    public float ConfigPanelHeight { get => ConfigPanel.GetComponent<RectTransform>().rect.height; }
+
     public Transform ToppingPrefab;
 
     public Transform RangeDiscPrefab;
@@ -21,12 +23,28 @@ public class DuckManager : MonoBehaviour
 
     public bool IsDuckSelected { get => selectedDuck != null; }
 
+
     private Duck selectedDuck;
+
+    public float CameraTransitionSpeed = 10f;
+    private Vector3 previousCameraPosition;
+    private Quaternion previousCameraRotation;
+
+    private float cameraFOV;
+    private Quaternion cameraRotation;
+    private Vector3 cameraPosition;
 
     private void Awake()
     {
         Instance = this;
         ConfigPanel.SetActive(false);
+    }
+
+    private void Start()
+    {
+        cameraFOV = Camera.main.fieldOfView;
+        cameraPosition = Camera.main.transform.position;
+        cameraRotation = Camera.main.transform.rotation;
     }
 
     public void ToppingButtonPressed()
@@ -41,6 +59,15 @@ public class DuckManager : MonoBehaviour
 
     public void Select(Duck duck)
     {
+        if (!IsDuckSelected)
+        {
+            previousCameraPosition = Camera.main.transform.position;
+            previousCameraRotation = Camera.main.transform.rotation;
+            cameraPosition = Camera.main.transform.position - new Vector3(0, 100, 0);
+            cameraFOV -= 16;
+        }
+        cameraRotation = Quaternion.LookRotation(duck.transform.position - cameraPosition);
+
         selectedDuck = duck;
         if (RangeDisc == null)
             RangeDisc = Instantiate(RangeDiscPrefab, duck.transform.position, Quaternion.identity);
@@ -49,6 +76,7 @@ public class DuckManager : MonoBehaviour
         RangeDisc.localScale = new Vector3(duck.Range, 1f, duck.Range);
         TargetModeDropdown.SetValueWithoutNotify((int)duck.TargetMode);
         ConfigPanel.SetActive(true);
+
     }
 
     public void Deselect()
@@ -58,6 +86,9 @@ public class DuckManager : MonoBehaviour
             selectedDuck = null;
             Destroy(RangeDisc.gameObject);
             ConfigPanel.SetActive(false);
+            cameraPosition = previousCameraPosition;
+            cameraRotation = previousCameraRotation;
+            cameraFOV += 16;
         }
     }
 
@@ -73,6 +104,11 @@ public class DuckManager : MonoBehaviour
                 node.tag = "Untagged";
             }
         }
+
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, cameraPosition, CameraTransitionSpeed * Time.deltaTime);
+        Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, cameraRotation, CameraTransitionSpeed * Time.deltaTime);
+        Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, cameraFOV, CameraTransitionSpeed * Time.deltaTime);
+
     }
 
     public void PlaceDuckOnNode(Node node)

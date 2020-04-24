@@ -7,22 +7,29 @@ public class Spoon : MonoBehaviour
 
     public float Velocity;
     public float Damage;
+    public int HitsUntilDestroy = 1;
 
-    // Start is called before the first frame update
+    private int remainingHits;
     void Start()
     {
-        
+        remainingHits = HitsUntilDestroy;
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(Vector3.forward * Velocity * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Environment"))
+        if (other.CompareTag("Environment"))
             Destroy(gameObject);
+        else if (other.CompareTag("Enemy"))
+        {
+            remainingHits--;
+            if(remainingHits == 0)
+                Destroy(gameObject);
+        }
     }
+
 }

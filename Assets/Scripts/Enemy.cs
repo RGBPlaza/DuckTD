@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float Speed = 10f;
     public float RotationalSpeed = 180f;
     public Transform SpinningBit;
+    public Transform PlaceToHit;
     public GameObject HealthBarGO;
 
     public float MaxHP = 6f;
@@ -40,13 +41,20 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        Vector3 rot = new Vector3(1, 1, 1) * RotationalSpeed * Time.deltaTime;
+        if (SpinningBit != null)
+        {
+            Vector3 rot = new Vector3(1, 1, 1) * RotationalSpeed * Time.deltaTime;
+            SpinningBit.Rotate(rot);
+        }
+
         Vector3 dir = Target.position - transform.position;
-        SpinningBit.Rotate(rot);
         if (dir.magnitude < 0.1)
             ReachedWayPoint();
         else
+        {
             transform.Translate(dir.normalized * Speed * Time.deltaTime, Space.World);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * RotationalSpeed);
+        }
     }
 
     private void ReachedWayPoint()
@@ -57,12 +65,11 @@ public class Enemy : MonoBehaviour
             wayPointIndex++;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Spoon spoon = collision.gameObject.GetComponent<Spoon>();
+        Spoon spoon = other.gameObject.GetComponent<Spoon>();
         currentHP -= spoon.Damage;
         healthBar.CurrentHP = currentHP;
-        Destroy(collision.gameObject);
         if (currentHP <= 0)
             Destroy(gameObject);
     }

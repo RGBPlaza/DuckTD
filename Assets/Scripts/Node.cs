@@ -23,7 +23,7 @@ public class Node : MonoBehaviour
     {
         if (DuckManager.Instance.IsPlacingDuck)
             DuckManager.Instance.PlaceDuckOnNode(this);
-        else if (DuckManager.Instance.IsDuckSelected && Input.mousePosition.y > 126)
+        else if (DuckManager.Instance.IsDuckSelected && Input.mousePosition.y > DuckManager.Instance.ConfigPanelHeight)
         {
             if (Duck == null)
                 DuckManager.Instance.Deselect();

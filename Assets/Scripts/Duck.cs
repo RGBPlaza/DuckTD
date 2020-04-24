@@ -15,6 +15,8 @@ public class Duck : MonoBehaviour
     public bool RightHanded = true;
     public TargetMode TargetMode = TargetMode.First;
 
+    public bool HitTwice = false;
+
     public Transform ProjectilePrefeb;
 
     private Transform target;
@@ -77,7 +79,7 @@ public class Duck : MonoBehaviour
         while (target != null)
         {
             Vector3 projectilePosition = transform.position + (transform.rotation * (1.8f * new Vector3(RightHanded ? 0.879f : -0.879f, 2.1f, -0.072f)));
-            Vector3 projectDir = target.position - projectilePosition;
+            Vector3 projectDir = target.GetComponent<Enemy>().PlaceToHit.position - projectilePosition;
             Quaternion projectileRotation = Quaternion.LookRotation(projectDir);
             if (isLookingAtTarget)
             {
@@ -98,6 +100,8 @@ public class Duck : MonoBehaviour
         Spoon spoon = Instantiate(ProjectilePrefeb, position, rotation).GetComponent<Spoon>();
         spoon.Velocity = SpoonVelocity;
         spoon.Damage = SpoonDamage;
+        if(HitTwice)
+            spoon.HitsUntilDestroy = 2;
         projectileInstantiationData.RemoveAt(0);
     }
 

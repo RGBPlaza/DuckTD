@@ -54,6 +54,7 @@ MonoBehaviour:
   FoVAngle: 16
   RightHanded: 1
   TargetMode: 0
+  HitTwice: 0
   ProjectilePrefeb: {fileID: 4688271412684583504, guid: fab2faadd14e0cc49a4ea41803fc76a7,
     type: 3}
 --- !u!95 &3282270174919415351
@@ -95,10 +96,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3078442835906975219}
     m_Modifications:
+    - target: {fileID: -7552074630532517051, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6feae3c8602411942b638b5d5724e8bc, type: 2}
     - target: {fileID: -7419355716805590760, guid: db106fa113fe21c4698cfe5ab743d1fc,
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: -6801408690086287149, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_Name
+      value: Beak
       objectReference: {fileID: 0}
     - target: {fileID: -6429571183000230263, guid: db106fa113fe21c4698cfe5ab743d1fc,
         type: 3}
