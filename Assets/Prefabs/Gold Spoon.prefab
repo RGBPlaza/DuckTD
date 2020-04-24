@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -5232065669504197060}
   - component: {fileID: 6301314660376729202}
   - component: {fileID: -19009982461654139}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gold Spoon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,6 +163,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: spoon_model
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: aca89502443fd3345b2e54de6eb6222f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aca89502443fd3345b2e54de6eb6222f, type: 3}

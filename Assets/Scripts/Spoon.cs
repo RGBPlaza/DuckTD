@@ -22,7 +22,6 @@ public class Spoon : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("hi");
         if (collision.gameObject.CompareTag("Environment"))
             Destroy(gameObject);
     }

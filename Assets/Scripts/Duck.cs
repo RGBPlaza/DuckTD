@@ -41,7 +41,6 @@ public class Duck : MonoBehaviour
             isLookingAtTarget = Vector3.Angle(transform.forward, targetDir) <= FoVAngle / 2f;
             Quaternion lookRotation = Quaternion.LookRotation(targetDir);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * RotationSpeed);
-            print("hi");
         }
     }
 
@@ -110,7 +109,7 @@ public class Duck : MonoBehaviour
 
     private void OnMouseDown()
     {
-        DuckManager.Select(this);
+        DuckManager.Instance.Select(this);
     }
 
 }
