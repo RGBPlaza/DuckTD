@@ -23,13 +23,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6558672140140668352}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.70741534, y: -0, z: -0, w: 0.70679814}
   m_LocalPosition: {x: 0, y: 5.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7841967062735369486}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.956, y: 0, z: 0}
 --- !u!1 &9183864497433435935
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +78,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898e396ea137e7e4d95de1b3f30b9a90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
+  Name: Floating Log
   Speed: 10
   RotationalSpeed: 50
   SpinningBit: {fileID: 4088887923491912178}
@@ -87,7 +89,7 @@ MonoBehaviour:
   HealthBarGO: {fileID: 5407693418641206607}
   dropPrefab: {fileID: 5875940529763825832, guid: a517b66f2ce6c9640bb38205dce18597,
     type: 3}
-  MaxHP: 6
+  MaxHP: 12
 --- !u!65 &-6196053157873287322
 BoxCollider:
   m_ObjectHideFlags: 0

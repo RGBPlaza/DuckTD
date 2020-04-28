@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4464606759651713520}
   - component: {fileID: 4464606759651713527}
   - component: {fileID: -3377054486153433948}
+  - component: {fileID: -5711422116563721907}
   m_Layer: 0
   m_Name: Node
   m_TagString: Untagged
@@ -111,3 +112,17 @@ MonoBehaviour:
     type: 2}
   OccupiedPlacementMaterial: {fileID: 2100000, guid: ed8b79624f344214fb4c77c44acfd236,
     type: 2}
+--- !u!114 &-5711422116563721907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4464606759651713526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc941ca84d3578449abb7d55e82d413d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deselectDuck: 0
+  hideInventory: 1

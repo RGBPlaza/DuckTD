@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
 
+    public int ID;
+    public string Name;
+
     public float Speed = 10f;
     public float RotationalSpeed = 180f;
     public Transform SpinningBit;
@@ -20,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     private float currentHP;
     private HealthBar healthBar;
-    private Vector3 randomSpinDirection;
+    private Vector3 randomAngularVelocity;
 
     public float DistanceFromEnd
     {
@@ -48,7 +51,7 @@ public class Enemy : MonoBehaviour
             do xzSpinDirection = Random.insideUnitCircle;
             while (xzSpinDirection.magnitude == 0);
             xzSpinDirection = xzSpinDirection.normalized;
-            randomSpinDirection = new Vector3(xzSpinDirection.x, Random.value, xzSpinDirection.y);
+            randomAngularVelocity = new Vector3(xzSpinDirection.x, Random.value, xzSpinDirection.y) * RotationalSpeed;
         }
     }
 
@@ -56,7 +59,7 @@ public class Enemy : MonoBehaviour
     {
         if (RandomSpin)
         {
-            Vector3 rot = randomSpinDirection * RotationalSpeed * Time.deltaTime;
+            Vector3 rot = randomAngularVelocity * Time.deltaTime;
             SpinningBit.Rotate(rot);
         }
 
@@ -66,7 +69,7 @@ public class Enemy : MonoBehaviour
         else
         {
             transform.Translate(dir.normalized * Speed * Time.deltaTime, Space.World);
-            if(TurnToFaceWayPoint)
+            if (TurnToFaceWayPoint)
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * RotationalSpeed);
         }
     }
@@ -88,10 +91,21 @@ public class Enemy : MonoBehaviour
             healthBar.CurrentHP = currentHP;
             if (currentHP <= 0)
             {
-                if (RandomSpin)
-                    Instantiate(dropPrefab, SpinningBit.position, SpinningBit.rotation);
+                Transform drop;
+                Rigidbody rb;
+                if (TurnToFaceWayPoint)
+                {
+                    drop = Instantiate(dropPrefab, PlaceToHit.position, PlaceToHit.rotation);
+                    rb = drop.GetComponent<Rigidbody>();
+                    rb.velocity = transform.forward * Speed;
+                }
                 else
-                    Instantiate(dropPrefab, PlaceToHit.position, PlaceToHit.rotation);
+                {
+                    Vector3 dir = Target.position - transform.position;
+                    drop = Instantiate(dropPrefab, SpinningBit.position, SpinningBit.rotation);
+                    rb = drop.GetComponent<Rigidbody>();
+                    rb.velocity = dir.normalized * Speed;
+                }
                 Destroy(gameObject);
             }
         }

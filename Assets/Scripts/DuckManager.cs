@@ -6,7 +6,13 @@ using UnityEngine.UI;
 
 public class DuckManager : MonoBehaviour
 {
+    #region Singleton
     public static DuckManager Instance { get; private set; }
+    private void Awake()
+    {
+        Instance = this;
+    }
+    #endregion
 
     public GameObject ConfigPanel;
     public Dropdown TargetModeDropdown;
@@ -32,14 +38,9 @@ public class DuckManager : MonoBehaviour
     private Quaternion cameraRotation;
     private Vector3 cameraPosition;
 
-    private void Awake()
-    {
-        Instance = this;
-        ConfigPanel.SetActive(false);
-    }
-
     private void Start()
     {
+        ConfigPanel.SetActive(false);
         cameraFOV = Camera.main.fieldOfView;
         cameraPosition = Camera.main.transform.position;
         cameraRotation = Camera.main.transform.rotation;
