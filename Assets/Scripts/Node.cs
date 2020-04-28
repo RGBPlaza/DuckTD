@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Node : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class Node : MonoBehaviour
     {
         if (DuckManager.Instance.IsPlacingDuck)
             DuckManager.Instance.PlaceDuckOnNode(this);
-        else if (DuckManager.Instance.IsDuckSelected && Input.mousePosition.y > DuckManager.Instance.ConfigPanelHeight)
+        else if (DuckManager.Instance.IsDuckSelected && !EventSystem.current.IsPointerOverGameObject())
         {
             if (Duck == null)
                 DuckManager.Instance.Deselect();

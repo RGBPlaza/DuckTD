@@ -11,8 +11,6 @@ public class DuckManager : MonoBehaviour
     public GameObject ConfigPanel;
     public Dropdown TargetModeDropdown;
 
-    public float ConfigPanelHeight { get => ConfigPanel.GetComponent<RectTransform>().rect.height; }
-
     public Transform ToppingPrefab;
 
     public Transform RangeDiscPrefab;

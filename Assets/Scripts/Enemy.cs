@@ -10,13 +10,17 @@ public class Enemy : MonoBehaviour
     public float Speed = 10f;
     public float RotationalSpeed = 180f;
     public Transform SpinningBit;
+    public bool RandomSpin = false;
+    public bool TurnToFaceWayPoint = true;
     public Transform PlaceToHit;
     public GameObject HealthBarGO;
+    public Transform dropPrefab;
 
     public float MaxHP = 6f;
 
     private float currentHP;
     private HealthBar healthBar;
+    private Vector3 randomSpinDirection;
 
     public float DistanceFromEnd
     {
@@ -37,13 +41,22 @@ public class Enemy : MonoBehaviour
         healthBar = HealthBarGO.GetComponent<HealthBar>();
         currentHP = MaxHP;
         healthBar.MaxHP = MaxHP; // Automatically sets current HP to max
+        if (RandomSpin)
+        {
+            SpinningBit.rotation = Random.rotation;
+            Vector2 xzSpinDirection;
+            do xzSpinDirection = Random.insideUnitCircle;
+            while (xzSpinDirection.magnitude == 0);
+            xzSpinDirection = xzSpinDirection.normalized;
+            randomSpinDirection = new Vector3(xzSpinDirection.x, Random.value, xzSpinDirection.y);
+        }
     }
 
     private void Update()
     {
-        if (SpinningBit != null)
+        if (RandomSpin)
         {
-            Vector3 rot = new Vector3(1, 1, 1) * RotationalSpeed * Time.deltaTime;
+            Vector3 rot = randomSpinDirection * RotationalSpeed * Time.deltaTime;
             SpinningBit.Rotate(rot);
         }
 
@@ -53,7 +66,8 @@ public class Enemy : MonoBehaviour
         else
         {
             transform.Translate(dir.normalized * Speed * Time.deltaTime, Space.World);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * RotationalSpeed);
+            if(TurnToFaceWayPoint)
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(dir), Time.deltaTime * RotationalSpeed);
         }
     }
 
@@ -67,11 +81,20 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Spoon spoon = other.gameObject.GetComponent<Spoon>();
-        currentHP -= spoon.Damage;
-        healthBar.CurrentHP = currentHP;
-        if (currentHP <= 0)
-            Destroy(gameObject);
+        if (other.CompareTag("Spoon"))
+        {
+            Spoon spoon = other.GetComponent<Spoon>();
+            currentHP -= spoon.Damage;
+            healthBar.CurrentHP = currentHP;
+            if (currentHP <= 0)
+            {
+                if (RandomSpin)
+                    Instantiate(dropPrefab, SpinningBit.position, SpinningBit.rotation);
+                else
+                    Instantiate(dropPrefab, PlaceToHit.position, PlaceToHit.rotation);
+                Destroy(gameObject);
+            }
+        }
     }
 
     private void OnMouseDown()

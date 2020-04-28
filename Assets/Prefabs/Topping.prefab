@@ -106,6 +106,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: -6874540395504895234, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6874540395504895234, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_ReceiveGI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6874540395504895234, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b3cfb467e88ceaf439bab063b87b562b, type: 2}
     - target: {fileID: -6801408690086287149, guid: db106fa113fe21c4698cfe5ab743d1fc,
         type: 3}
       propertyPath: m_Name
@@ -365,6 +380,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5133913965574556032, guid: db106fa113fe21c4698cfe5ab743d1fc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6011209174284744883, guid: db106fa113fe21c4698cfe5ab743d1fc,
         type: 3}
