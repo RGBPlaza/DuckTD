@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed9e4cdb4c6a77f43bce762288c514d4, type: 3}
-  m_Name: Log
+  m_Name: Beam
   m_EditorClassIdentifier: 
-  ID: 0
-  Name: Log
+  ID: 1
+  Name: Beam
   Description: 
-  IconSprite: {fileID: 21300000, guid: cf85cb05c46a6ad4490f3ae3281ef302, type: 3}
+  IconSprite: {fileID: 21300000, guid: a08e5e51c6be99f4498732d7ada9f641, type: 3}
   DroppedBy:
-  - {fileID: 6347407186576606862, guid: ac2ccd781eacf294abb9e00f21c04fde, type: 3}
+  - {fileID: 6347407186576606862, guid: 9716477fa75a2c546aa57c832afedef7, type: 3}

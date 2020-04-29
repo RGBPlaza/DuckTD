@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-
     public int ID;
     public string Name;
 
@@ -18,6 +17,7 @@ public class Enemy : MonoBehaviour
     public Transform PlaceToHit;
     public GameObject HealthBarGO;
     public Transform dropPrefab;
+    public float dropProbability = 0.5f;
 
     public float MaxHP = 6f;
 
@@ -82,32 +82,40 @@ public class Enemy : MonoBehaviour
             wayPointIndex++;
     }
 
+    bool killed = false;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Spoon"))
+        if (other.CompareTag("Spoon") && !killed)
         {
             Spoon spoon = other.GetComponent<Spoon>();
             currentHP -= spoon.Damage;
             healthBar.CurrentHP = currentHP;
             if (currentHP <= 0)
             {
-                Transform drop;
-                Rigidbody rb;
-                if (TurnToFaceWayPoint)
-                {
-                    drop = Instantiate(dropPrefab, PlaceToHit.position, PlaceToHit.rotation);
-                    rb = drop.GetComponent<Rigidbody>();
-                    rb.velocity = transform.forward * Speed;
-                }
-                else
-                {
-                    Vector3 dir = Target.position - transform.position;
-                    drop = Instantiate(dropPrefab, SpinningBit.position, SpinningBit.rotation);
-                    rb = drop.GetComponent<Rigidbody>();
-                    rb.velocity = dir.normalized * Speed;
-                }
+                killed = true;
+                if (Random.value <= dropProbability)
+                    DropItem();
                 Destroy(gameObject);
             }
+        }
+    }
+
+    private void DropItem()
+    {
+        Transform drop;
+        Rigidbody rb;
+        if (TurnToFaceWayPoint)
+        {
+            drop = Instantiate(dropPrefab, PlaceToHit.position, PlaceToHit.rotation);
+            rb = drop.GetComponent<Rigidbody>();
+            rb.velocity = transform.forward * Speed;
+        }
+        else
+        {
+            Vector3 dir = Target.position - transform.position;
+            drop = Instantiate(dropPrefab, SpinningBit.position, SpinningBit.rotation);
+            rb = drop.GetComponent<Rigidbody>();
+            rb.velocity = dir.normalized * Speed;
         }
     }
 

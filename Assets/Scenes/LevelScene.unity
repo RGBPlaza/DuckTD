@@ -4465,7 +4465,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 962936452}
+      - m_Target: {fileID: 626356334}
         m_MethodName: Show
         m_Mode: 1
         m_Arguments:
@@ -4615,7 +4615,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 962936452}
+      - m_Target: {fileID: 626356334}
         m_MethodName: Hide
         m_Mode: 1
         m_Arguments:
@@ -6295,6 +6295,7 @@ GameObject:
   - component: {fileID: 626356332}
   - component: {fileID: 626356331}
   - component: {fileID: 626356330}
+  - component: {fileID: 626356334}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6386,6 +6387,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &626356334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626356329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6fa55aa72cab2e44954e53eff52d0fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PanelGO: {fileID: 952395915}
+  InventorySlotPrefab: {fileID: -8740780423938563222, guid: bb2df73857db42b4a842acdcafa8e2f1,
+    type: 3}
 --- !u!1001 &676696167
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9301,7 +9317,6 @@ GameObject:
   - component: {fileID: 962936451}
   - component: {fileID: 962936452}
   - component: {fileID: 962936453}
-  - component: {fileID: 962936454}
   m_Layer: 0
   m_Name: Rassilon
   m_TagString: Untagged
@@ -9370,9 +9385,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c14b58b36cab74e89113923e2a050c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryPanelGO: {fileID: 952395915}
-  InventorySlotPrefab: {fileID: 5331208206842787046, guid: bb2df73857db42b4a842acdcafa8e2f1,
-    type: 3}
 --- !u!114 &962936453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9382,27 +9394,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 962936448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1fc25d35590e3c45836728b8687e440, type: 3}
+  m_Script: {fileID: 11500000, guid: 15cc434f82f0a9548b743c5ce2e68cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Items:
-  - {fileID: 11400000, guid: e799e5da22fe12d47bf180444e414409, type: 2}
-  - {fileID: 11400000, guid: efee422f2d4585d4eaff3407e73eb74f, type: 2}
---- !u!114 &962936454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962936448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f88ce2e694a5d964e87818ea1e04aedf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyPrefabs:
-  - {fileID: 9183864497433435935, guid: ac2ccd781eacf294abb9e00f21c04fde, type: 3}
-  - {fileID: 9183864497433435935, guid: b9596c4b4e56fb6429d86117cbc46f97, type: 3}
 --- !u!1001 &985837643
 PrefabInstance:
   m_ObjectHideFlags: 0

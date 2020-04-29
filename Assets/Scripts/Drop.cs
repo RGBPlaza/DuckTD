@@ -38,7 +38,7 @@ public class Drop : MonoBehaviour
                 rb.useGravity = false;
                 rb.velocity = new Vector3(0, RiseSpeed / transform.localScale.magnitude, 0);
                 collected = true;
-                Inventory.Instance.AddItem(Item.ID);
+                Inventory.Instance.Add(Item);
             }
         }
     }

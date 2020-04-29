@@ -114,8 +114,8 @@ public class Duck : MonoBehaviour
     private void OnMouseDown()
     {
         DuckManager.Instance.Select(this);
-        if (Inventory.Instance.IsShowing)
-            Inventory.Instance.Hide();
+        if (InventoryUI.Instance.IsShowing)
+            InventoryUI.Instance.Hide();
     }
 
 }

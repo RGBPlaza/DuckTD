@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
+using System.Linq;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -10,9 +12,20 @@ public class WaveSpawner : MonoBehaviour
     public float TimeBetweenWaves = 4f;
     public float TimeBetweenEnemySpawns = 0.8f;
 
+    private Enemy[] enemies;
+
     private float countDown;
     private int currentWave;
     private bool isWaveInProgress;
+
+    private void Awake()
+    {
+        string[] guids = AssetDatabase.FindAssets($"t:{nameof(GameObject)}", new string[] { "Assets/Prefabs/Enemies" });
+        enemies = new Enemy[guids.Length];
+        for (int i = 0; i < guids.Length; i++)
+            enemies[i] = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guids[i])).GetComponent<Enemy>();
+        enemies = enemies.OrderBy(x => x.ID).ToArray();
+    }
 
     private void Start()
     {
@@ -52,7 +65,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        Instantiate(EnemyPrefabCatalogue.GetForID(currentWave % 2), StartNode.position + new Vector3(0, 1, 0), StartNode.rotation);
+        Instantiate(enemies[(currentWave - 1) % 3], StartNode.position + new Vector3(0, 1, 0), StartNode.rotation);
     }
 
 }

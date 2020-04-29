@@ -14,8 +14,8 @@ public class Environment : MonoBehaviour
         if (!EventSystem.current.IsPointerOverGameObject()) {
             if (DuckManager.Instance.IsDuckSelected && deselectDuck)
                 DuckManager.Instance.Deselect();
-            if (Inventory.Instance.IsShowing && hideInventory)
-                Inventory.Instance.Hide();
+            if (InventoryUI.Instance.IsShowing && hideInventory)
+                InventoryUI.Instance.Hide();
         }
     }
 }

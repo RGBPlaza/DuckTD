@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
+using System;
 
 public class Inventory : MonoBehaviour
 {
@@ -13,48 +15,75 @@ public class Inventory : MonoBehaviour
     }
     #endregion
 
+    // Key: Item Preset; Value: Quantity in Inventory; 
+    private Dictionary<Item, int> items;
 
-    public GameObject InventoryPanelGO;
-    public GameObject InventorySlotPrefab;
-
-    private Dictionary<int, int> items;
-    private List<InventorySlot> slots;
+    public event Action<InventoryEventArgs> OnContentsChanged;
 
     private void Start()
     {
-        items = new Dictionary<int, int>();
-        slots = new List<InventorySlot>();
+        items = new Dictionary<Item, int>();
     }
 
-    public void AddItem(int itemID)
+    private void Update()
     {
-        InventorySlot slot;
-        if (items.ContainsKey(itemID))
-        {
-            items[itemID]++;
-            slot = slots.Single(x => x.ItemID == itemID);
-            slot.Count++;
-        }
+        if (Input.GetKeyDown(KeyCode.S))
+            Sort();
+    }
+
+    public void Sort()
+    {
+        items = items.OrderBy(x => x.Key.ID).ToDictionary(pair => pair.Key, pair => pair.Value);
+        OnContentsChanged?.Invoke(new InventoryEventArgs(InventoryOperation.Sort));
+    }
+
+    public void Add(Item item, int count = 1)
+    {
+        if (items.ContainsKey(item))
+            items[item] += count;
         else
+            items.Add(item, count);
+        OnContentsChanged?.Invoke(new InventoryEventArgs(InventoryOperation.Add, item, items[item]));
+    }
+
+    public void Remove(Item item, int count = 1)
+    {
+        if (items.ContainsKey(item))
         {
-            items.Add(itemID, 1);
-            slot = Instantiate(InventorySlotPrefab, InventoryPanelGO.transform).GetComponent<InventorySlot>();
-            slot.ItemID = itemID;
-            slot.Count = 1;
-            slots.Add(slot);
+            if (items[item] > count)
+                items[item] -= count;
+            else
+                items.Remove(item);
+            OnContentsChanged?.Invoke(new InventoryEventArgs(InventoryOperation.Remove, item, items.ContainsKey(item) ? items[item] : 0));
         }
+        else 
+            Debug.LogWarning($"You cannot remove {item.Name} because you don't have it");
     }
 
-    public void Show()
+    public int Count(Item item) => items[item];
+
+    public List<Item> ItemOrder => items.Keys.ToList();
+
+
+}
+
+public class InventoryEventArgs : EventArgs
+{
+    public Item Item;
+    public int NewCount;
+    public InventoryOperation Operation;
+
+    public InventoryEventArgs(InventoryOperation operation, Item item = null, int newCount = 0)
     {
-        InventoryPanelGO.SetActive(true);
+        Operation = operation;
+        Item = item;
+        NewCount = newCount;
     }
+}
 
-    public void Hide()
-    {
-        InventoryPanelGO.SetActive(false);
-    }
-
-    public bool IsShowing { get => InventoryPanelGO.activeSelf; }
-
+public enum InventoryOperation
+{
+    Add, 
+    Remove, 
+    Sort
 }

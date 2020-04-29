@@ -11,7 +11,7 @@ public class InventorySlot : MonoBehaviour
     private Item item;
     private int count;
 
-    public int ItemID { get => item.ID; set { item = ItemCatalogue.GetForID(value); Icon.sprite = item.IconSprite; } }
+    public Item Item { get => item; set { item = value; Icon.sprite = value.IconSprite; } }
     public int Count { get => count; set { count = value; CounterText.text = value.ToString(); } }
 
 }
