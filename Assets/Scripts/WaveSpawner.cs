@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using System.Linq;
 
 public class WaveSpawner : MonoBehaviour
@@ -20,11 +19,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void Awake()
     {
-        string[] guids = AssetDatabase.FindAssets($"t:{nameof(GameObject)}", new string[] { "Assets/Prefabs/Enemies" });
-        enemies = new Enemy[guids.Length];
-        for (int i = 0; i < guids.Length; i++)
-            enemies[i] = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guids[i])).GetComponent<Enemy>();
-        enemies = enemies.OrderBy(x => x.ID).ToArray();
+        enemies = Resources.LoadAll<Enemy>("Enemies").OrderBy(x => x.ID).ToArray();
     }
 
     private void Start()

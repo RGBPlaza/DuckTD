@@ -999,8 +999,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 1284584592}
+  HeadBone: {fileID: 2123756224}
   WalkSpeed: 40
-  RotateSpeed: 1024
+  RotateSpeed: 2048
   Gravity: 9.8
   JumpVelocity: 10
 --- !u!1001 &71697363
@@ -14987,6 +14988,26 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 2100000, guid: 83b5e295fa68f0d4c882fb3348e6dab0, type: 2}
+    - target: {fileID: -7780734103960978560, guid: d35f19166b0097d48912e160be432989,
+        type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7780734103960978560, guid: d35f19166b0097d48912e160be432989,
+        type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7780734103960978560, guid: d35f19166b0097d48912e160be432989,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7780734103960978560, guid: d35f19166b0097d48912e160be432989,
+        type: 3}
+      propertyPath: m_ReflectionProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -6057140222963153312, guid: d35f19166b0097d48912e160be432989,
         type: 3}
       propertyPath: m_Controller
@@ -20172,6 +20193,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4464606759651713522, guid: 966d09f626d853443a204c5540d6880f,
     type: 3}
   m_PrefabInstance: {fileID: 2121596329}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2123756224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1707243787577406375, guid: d35f19166b0097d48912e160be432989,
+    type: 3}
+  m_PrefabInstance: {fileID: 1510339363}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2140227392
 PrefabInstance:

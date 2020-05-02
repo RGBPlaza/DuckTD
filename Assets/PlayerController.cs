@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
 
     public Camera Camera;
+    public Transform HeadBone;
 
     public float WalkSpeed = 5f;
     public float RotateSpeed = 10f;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -35,12 +36,12 @@ public class PlayerController : MonoBehaviour
                 characterController.Move(transform.right * WalkSpeed * Time.deltaTime);
             if (Input.GetKey(KeyCode.O))
                 characterController.Move(-transform.right * WalkSpeed * Time.deltaTime);
-            transform.Rotate(transform.up * Input.GetAxis("Mouse X") * RotateSpeed * Time.deltaTime);
         }
         else
             verticalVelocity -= Gravity * Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Space) && verticalVelocity == 0)
             verticalVelocity = JumpVelocity;
+        transform.Rotate(transform.up * Input.GetAxis("Mouse X") * RotateSpeed * Time.deltaTime);
     }
 
 }
