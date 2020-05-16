@@ -134,7 +134,7 @@ MonoBehaviour:
   RightHanded: 1
   TargetMode: 0
   HitTwice: 0
-  ProjectilePrefeb: {fileID: 4688271412684583504, guid: fab2faadd14e0cc49a4ea41803fc76a7,
+  ProjectilePrefab: {fileID: 4688271412684583504, guid: fab2faadd14e0cc49a4ea41803fc76a7,
     type: 3}
 --- !u!95 &1562942396362622234
 Animator:

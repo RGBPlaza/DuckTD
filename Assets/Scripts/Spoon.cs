@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spoon : MonoBehaviour
 {
 
-    public float Velocity;
+    public float ForwardVelocity;
     public float Damage;
     public int HitsUntilDestroy = 1;
 
@@ -17,7 +17,7 @@ public class Spoon : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * Velocity * Time.deltaTime);
+        transform.Translate(Vector3.forward * ForwardVelocity * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

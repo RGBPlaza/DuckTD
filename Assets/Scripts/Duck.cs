@@ -17,7 +17,7 @@ public class Duck : MonoBehaviour
 
     public bool HitTwice = false;
 
-    public Transform ProjectilePrefeb;
+    public Transform ProjectilePrefab;
 
     private Transform target;
     private bool targetSet = false;
@@ -97,8 +97,8 @@ public class Duck : MonoBehaviour
     private void InstantiateProjectile()
     {
         (Vector3 position, Quaternion rotation) = projectileInstantiationData[0];
-        Spoon spoon = Instantiate(ProjectilePrefeb, position, rotation).GetComponent<Spoon>();
-        spoon.Velocity = SpoonVelocity;
+        Spoon spoon = Instantiate(ProjectilePrefab, position, rotation).GetComponent<Spoon>();
+        spoon.ForwardVelocity = SpoonVelocity;
         spoon.Damage = SpoonDamage;
         if(HitTwice)
             spoon.HitsUntilDestroy = 2;
